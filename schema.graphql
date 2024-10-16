@@ -1,0 +1,17 @@
+type Split {
+  id: ID!
+  address: String!
+  totalAllocation: BigInt!
+  distributionIncentive: BigInt!
+  recipients: [String!]!
+  allocations: [BigInt!]!
+  distributions: [SplitDistribution!]! @derivedFrom(field: "split")
+}
+
+type SplitDistribution {
+  id: ID!
+  split: Split!
+  token: String!
+  distributor: String!
+  amount: BigInt!
+}

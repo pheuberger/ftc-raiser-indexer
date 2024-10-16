@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=./node_modules/envio/evm.schema.json
+name: envio-indexer
+networks:
+  - id: 11155111
+    start_block: 6856536
+    contracts:
+      - name: SplitMain
+        address:
+          - 0x22E8ceF567DD10c35F35e03a1dbD25CDa03C4Ac2
+        handler: src/EventHandlers.ts
+        events:
+          - event: SplitDistributed(address indexed token, address indexed distributor, uint256 amount)
+          - event: SplitUpdated((address[],uint256[],uint256,uint16) splitParams)
+      - name: SplitFactory
+        address:
+          - 0x80f1B766817D04870f115fEBbcCADF8DBF75E017
+        handler: src/EventHandlers.ts
+        events:
+          - event: SplitCreated(address indexed split,(address[],uint256[],uint256,uint16) splitParams,address owner,address creator)
+rollback_on_reorg: false
